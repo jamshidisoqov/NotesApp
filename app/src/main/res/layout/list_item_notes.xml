@@ -13,8 +13,8 @@
         android:id="@+id/tv_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
         android:maxLines="6"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -24,13 +24,14 @@
         android:id="@+id/tv_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        app:layout_constraintTop_toBottomOf="@id/tv_title"
-        app:layout_constraintVertical_bias="1"
         android:layout_alignParentBottom="true"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="4dp"
         android:textColor="#ACAAAA"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        app:layout_constraintVertical_bias="1"
         tools:text="07/09/2021" />
 
     <ImageView
@@ -38,20 +39,24 @@
         android:layout_width="28dp"
         android:layout_height="28dp"
         android:layout_marginEnd="4dp"
+        android:background="@drawable/bg_delete_bg"
         android:padding="4dp"
         android:src="@drawable/ic_pin"
         app:layout_constraintBottom_toBottomOf="@id/tv_date"
         app:layout_constraintEnd_toStartOf="@id/image_trash"
-        app:layout_constraintTop_toTopOf="@id/tv_date" />
+        app:layout_constraintTop_toTopOf="@id/tv_date"
+        tools:ignore="ContentDescription" />
 
     <ImageView
         android:id="@+id/image_trash"
         android:layout_width="28dp"
         android:layout_height="28dp"
+        android:background="@drawable/bg_delete_bg"
         android:padding="4dp"
         android:src="@drawable/ic_trash"
         app:layout_constraintBottom_toBottomOf="@id/tv_date"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tv_date" />
+        app:layout_constraintTop_toTopOf="@id/tv_date"
+        tools:ignore="ContentDescription" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

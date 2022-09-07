@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainScreen">
+
+    <fragment
+        android:id="@+id/mainScreen"
+        tools:layout="@layout/screen_main"
+        android:name="uz.gita.notes_app.ui.main.MainScreen"
+        android:label="MainScreen" >
+        <action
+            android:id="@+id/action_mainScreen_to_notesScreen"
+            app:destination="@id/notesScreen" />
+        <action
+            android:id="@+id/action_mainScreen_to_tasksScreen"
+            app:destination="@id/tasksScreen" />
+    </fragment>
+    <fragment
+        android:id="@+id/notesScreen"
+        tools:layout="@layout/screen_notes"
+        android:name="uz.gita.notes_app.ui.note.NotesScreen"
+        android:label="NotesScreen" >
+        <action
+            android:id="@+id/action_notesScreen_to_addNoteScreen"
+            app:destination="@id/addNoteScreen" />
+        <action
+            android:id="@+id/action_notesScreen_to_updateNoteScreen"
+            app:destination="@id/updateNoteScreen" />
+    </fragment>
+    <fragment
+        android:id="@+id/tasksScreen"
+        android:name="uz.gita.notes_app.ui.task.TasksScreen"
+        tools:layout="@layout/screen_tasks"
+        android:label="TasksScreen" />
+    <fragment
+        android:id="@+id/addNoteScreen"
+        tools:layout="@layout/screen_add_notes"
+        android:name="uz.gita.notes_app.ui.note.add.AddNoteScreen"
+        android:label="AddNoteScreen" >
+        <argument
+            android:name="category"
+            app:argType="integer"
+            android:defaultValue="1" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateNoteScreen"
+        tools:layout="@layout/screen_update_notes"
+        android:name="uz.gita.notes_app.ui.note.update.UpdateNoteScreen"
+        android:label="UpdateNoteScreen" >
+        <argument
+            android:name="note"
+            app:argType="uz.gita.notes_app.data.models.NoteData" />
+    </fragment>
+</navigation>

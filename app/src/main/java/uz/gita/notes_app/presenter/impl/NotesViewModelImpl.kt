@@ -18,6 +18,7 @@ import uz.gita.notes_app.domain.usecase.note.impl.DeleteNoteUseCaseImpl
 import uz.gita.notes_app.domain.usecase.note.impl.GetAllNoteByCategoryUseCaseImpl
 import uz.gita.notes_app.domain.usecase.note.impl.GetAllNoteCategoryUseCaseImpl
 import uz.gita.notes_app.presenter.NotesViewModel
+import uz.gita.notes_app.utils.extensions.eventLiveData
 
 class NotesViewModelImpl : NotesViewModel, ViewModel() {
 
@@ -29,8 +30,6 @@ class NotesViewModelImpl : NotesViewModel, ViewModel() {
     private val deleteNoteUseCase: DeleteNoteUseCase = DeleteNoteUseCaseImpl()
 
     private val addNoteCategoryUseCase: AddNoteCategoryUseCase = AddNoteCategoryUseCaseImpl()
-
-    override val backLiveData: MutableLiveData<Unit> = MutableLiveData()
 
     override val searchLiveData: MutableLiveData<Unit> = MutableLiveData()
 
@@ -47,6 +46,7 @@ class NotesViewModelImpl : NotesViewModel, ViewModel() {
     override val addCategoryLiveData: MutableLiveData<Unit> = MutableLiveData()
 
     override val categoryListLiveData: MutableLiveData<List<NoteCategoryData>> = MutableLiveData()
+
 
     init {
         viewModelScope.launch {
@@ -84,20 +84,20 @@ class NotesViewModelImpl : NotesViewModel, ViewModel() {
         }
     }
 
-    override fun categoryClick(categoryData: NoteCategoryData) {
+    override fun categoryClick(category:Int) {
         viewModelScope.launch {
-            getAllNoteByCategoryUseCase.getAllNotesByCategory(categoryData.id)
+            getAllNoteByCategoryUseCase.getAllNotesByCategory(category)
                 .onEach {
                     notesLiveData.value = it
                 }.launchIn(this)
         }
     }
 
-    override fun backClick() {
-        backLiveData.value = Unit
-    }
-
     override fun addNote() {
         addNoteLiveData.value = Unit
+    }
+
+    override fun supportClick() {
+        supportLiveData.value = Unit
     }
 }

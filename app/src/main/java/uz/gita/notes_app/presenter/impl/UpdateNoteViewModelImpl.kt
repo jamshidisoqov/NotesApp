@@ -14,7 +14,7 @@ import uz.gita.notes_app.utils.extensions.eventLiveData
 
 class UpdateNoteViewModelImpl : UpdateNoteViewModel, ViewModel() {
 
-    val updateNoteUseCase: UpdateNoteUseCase = UpdateNoteUseCaseImpl()
+    private val updateNoteUseCase: UpdateNoteUseCase = UpdateNoteUseCaseImpl()
 
     override val backLiveData = emptyLiveData()
 
@@ -22,7 +22,21 @@ class UpdateNoteViewModelImpl : UpdateNoteViewModel, ViewModel() {
 
     override val changeTypeLiveData = eventLiveData<Int>()
 
+    override val changesLiveData = eventLiveData<Pair<Int, Boolean>>()
+
+    private val types = ArrayList<Int>()
+
+    override val messageLiveData = eventLiveData<String>()
+
     override fun changeType(type: Int) {
+        val ty = type - 1
+        if (types.contains(ty)) {
+            types.remove(ty)
+            changesLiveData.value = Pair(ty, false)
+        } else {
+            types.add(ty)
+            changesLiveData.value = Pair(ty, true)
+        }
         changeTypeLiveData.value = type
     }
 
@@ -31,11 +45,22 @@ class UpdateNoteViewModelImpl : UpdateNoteViewModel, ViewModel() {
     }
 
     override fun updateNote(noteData: NoteData) {
+
+        if (noteData.title == "") {
+            messageLiveData.value = "Title is empty, please enter a title"
+            return
+        }
+        if (noteData.description == "") {
+            messageLiveData.value = "Description is empty, please enter a title"
+            return
+        }
+
         viewModelScope.launch(Dispatchers.IO) {
             updateNoteUseCase.updateNote(noteData)
-            withContext(this.coroutineContext) {
+            withContext(Dispatchers.Main) {
                 updateLiveData.value = Unit
             }
         }
+        messageLiveData.value = "Successfully updated"
     }
 }

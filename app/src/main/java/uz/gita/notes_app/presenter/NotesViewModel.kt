@@ -7,8 +7,6 @@ import uz.gita.notes_app.data.models.NoteData
 // Created by Jamshid Isoqov an 9/6/2022
 interface NotesViewModel {
 
-    val backLiveData: LiveData<Unit>
-
     val searchLiveData: LiveData<Unit>
 
     val supportLiveData: LiveData<Unit>
@@ -35,10 +33,10 @@ interface NotesViewModel {
 
     fun deleteNote(noteData: NoteData)
 
-    fun categoryClick(categoryData: NoteCategoryData)
-
-    fun backClick()
+    fun categoryClick(category:Int)
 
     fun addNote()
+
+    fun supportClick()
 
 }

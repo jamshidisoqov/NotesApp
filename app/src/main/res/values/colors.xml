@@ -10,4 +10,5 @@
     <color name="bg_color">#252525</color>
     <color name="bg_attr_color">#3B3B3B</color>
     <color name="hint_color">#9A9A9A</color>
+    <color name="primary">#8687E7</color>
 </resources>

@@ -4,6 +4,11 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.sqlite.db.SupportSQLiteDatabase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
 import uz.gita.notes_app.data.source.local.dao.NoteDao
 import uz.gita.notes_app.data.source.local.dao.TaskDao
 import uz.gita.notes_app.data.source.local.entity.NoteCategoryEntity
@@ -28,6 +33,15 @@ abstract class AppDatabase : RoomDatabase() {
 
         fun init(ctx: Context) {
             instance = Room.databaseBuilder(ctx, AppDatabase::class.java, "task_app.db")
+                .addCallback(object : RoomDatabase.Callback() {
+                    override fun onCreate(db: SupportSQLiteDatabase) {
+                        CoroutineScope(Dispatchers.IO).launch {
+                            getInstance().noteDao().insertNoteCategory(NoteCategoryEntity(0, "All"))
+                            cancel()
+                        }
+                        super.onCreate(db)
+                    }
+                })
                 .build()
         }
 

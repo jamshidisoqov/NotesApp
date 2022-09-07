@@ -10,4 +10,9 @@
     <string name="support_us">Support US</string>
     <string name="about_us">About US</string>
     <string name="share">Share App</string>
+    <string name="delete_really">You want delete really it?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="add_category">Add category</string>
+    <string name="name">Name</string>
 </resources>
