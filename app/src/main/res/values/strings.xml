@@ -3,4 +3,11 @@
     <string name="tasks">Tasks</string>
     <string name="all">All</string>
     <string name="title">Title</string>
+    <string name="save_changes">Save changes?</string>
+    <string name="discard">Discard</string>
+    <string name="save">Save</string>
+
+    <string name="support_us">Support US</string>
+    <string name="about_us">About US</string>
+    <string name="share">Share App</string>
 </resources>

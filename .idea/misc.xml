@@ -4,8 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Jamshid/AndroidStudioProjects/NotesApp/app/src/main/res/drawable-v24/ic_tasks.xml" value="0.134" />
+        <entry key="..\:/Users/Jamshid/AndroidStudioProjects/NotesApp/app/src/main/res/drawable/bg_bottom_sheet_dialog.xml" value="0.134" />
         <entry key="..\:/Users/Jamshid/AndroidStudioProjects/NotesApp/app/src/main/res/drawable/bg_dialog.xml" value="0.134" />
+        <entry key="..\:/Users/Jamshid/AndroidStudioProjects/NotesApp/app/src/main/res/drawable/bg_discard_btn.xml" value="0.134" />
         <entry key="..\:/Users/Jamshid/AndroidStudioProjects/NotesApp/app/src/main/res/drawable/bg_image.xml" value="0.134" />
+        <entry key="..\:/Users/Jamshid/AndroidStudioProjects/NotesApp/app/src/main/res/drawable/bg_save_btn.xml" value="0.134" />
         <entry key="..\:/Users/Jamshid/AndroidStudioProjects/NotesApp/app/src/main/res/drawable/ic_edit.xml" value="0.134" />
         <entry key="..\:/Users/Jamshid/AndroidStudioProjects/NotesApp/app/src/main/res/drawable/ic_format_bold.xml" value="0.134" />
         <entry key="..\:/Users/Jamshid/AndroidStudioProjects/NotesApp/app/src/main/res/drawable/ic_like.xml" value="0.134" />
@@ -15,6 +18,7 @@
         <entry key="..\:/Users/Jamshid/AndroidStudioProjects/NotesApp/app/src/main/res/drawable/ic_sort.xml" value="0.134" />
         <entry key="..\:/Users/Jamshid/AndroidStudioProjects/NotesApp/app/src/main/res/drawable/ic_tasks.xml" value="0.134" />
         <entry key="..\:/Users/Jamshid/AndroidStudioProjects/NotesApp/app/src/main/res/drawable/ic_trash.xml" value="0.134" />
+        <entry key="..\:/Users/Jamshid/AndroidStudioProjects/NotesApp/app/src/main/res/layout/dialog_menu_bottom.xml" value="0.2039333048311244" />
         <entry key="..\:/Users/Jamshid/AndroidStudioProjects/NotesApp/app/src/main/res/layout/dialog_save_changes.xml" value="0.2039333048311244" />
         <entry key="..\:/Users/Jamshid/AndroidStudioProjects/NotesApp/app/src/main/res/layout/list_item_notes.xml" value="0.176" />
         <entry key="..\:/Users/Jamshid/AndroidStudioProjects/NotesApp/app/src/main/res/layout/list_item_tasks.xml" value="0.4" />
