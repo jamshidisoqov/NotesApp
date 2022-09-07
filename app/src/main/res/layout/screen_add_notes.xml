@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color">
+
+    <ImageView
+        android:id="@+id/image_back"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="16sp"
+        android:background="@drawable/bg_image"
+        android:padding="13dp"
+        android:src="@drawable/ic_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/image_save"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="16sp"
+        android:background="@drawable/bg_image"
+        android:padding="13dp"
+        android:src="@drawable/ic_check"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
+
+    <EditText
+        android:id="@+id/input_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16sp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/bg_color"
+        android:hint="@string/title"
+        android:inputType="text"
+        android:maxLines="1"
+        android:textColorHint="@color/hint_color"
+        android:textSize="36sp"
+        app:layout_constraintTop_toBottomOf="@id/image_back"
+        tools:ignore="Autofill" />
+
+    <jp.wasabeef.richeditor.RichEditor
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="16sp"
+        android:backgroundTint="@color/bg_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/input_title" />
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <ImageView
+                android:id="@+id/action_undo"
+                style="@style/ImageView"
+                android:contentDescription="@null"
+                android:src="@drawable/undo" />
+
+            <ImageView
+                android:id="@+id/action_redo"
+                style="@style/ImageView"
+                android:src="@drawable/redo" />
+
+            <ImageView
+                android:id="@+id/action_bold"
+                style="@style/ImageView"
+                android:contentDescription="@null"
+                android:src="@drawable/bold" />
+
+            <ImageView
+                android:id="@+id/action_italic"
+                style="@style/ImageView"
+                android:contentDescription="@null"
+                android:src="@drawable/italic" />
+
+            <ImageView
+                android:id="@+id/action_subscript"
+                style="@style/ImageView"
+                android:contentDescription="@null"
+                android:src="@drawable/subscript" />
+
+            <ImageView
+                android:id="@+id/action_superscript"
+                style="@style/ImageView"
+                android:contentDescription="@null"
+                android:src="@drawable/superscript" />
+
+            <ImageView
+                android:id="@+id/action_strikethrough"
+                style="@style/ImageView"
+                android:contentDescription="@null"
+                android:src="@drawable/strikethrough" />
+
+            <ImageView
+                android:id="@+id/action_underline"
+                style="@style/ImageView"
+                android:contentDescription="@null"
+                android:src="@drawable/underline" />
+
+            <ImageView
+                android:id="@+id/action_heading1"
+                style="@style/ImageView"
+                android:contentDescription="@null"
+                android:src="@drawable/h1" />
+
+            <ImageView
+                android:id="@+id/action_heading2"
+                style="@style/ImageView"
+                android:contentDescription="@null"
+                android:src="@drawable/h2" />
+
+            <ImageView
+                android:id="@+id/action_heading3"
+                style="@style/ImageView"
+                android:contentDescription="@null"
+                android:src="@drawable/h3" />
+
+            <ImageView
+                android:id="@+id/action_heading4"
+                style="@style/ImageView"
+                android:contentDescription="@null"
+                android:src="@drawable/h4" />
+
+            <ImageView
+                android:id="@+id/action_heading5"
+                style="@style/ImageView"
+                android:contentDescription="@null"
+                android:src="@drawable/h5" />
+
+            <ImageView
+                android:id="@+id/action_heading6"
+                style="@style/ImageView"
+                android:contentDescription="@null"
+                android:src="@drawable/h6" />
+
+            <ImageView
+                android:id="@+id/action_txt_color"
+                style="@style/ImageView"
+                android:contentDescription="@null"
+                android:src="@drawable/txt_color" />
+
+            <ImageView
+                android:id="@+id/action_bg_color"
+                style="@style/ImageView"
+                android:contentDescription="@null"
+                android:src="@drawable/bg_color" />
+
+
+            <ImageView
+                android:id="@+id/action_indent"
+                style="@style/ImageView"
+                android:contentDescription="@null"
+                android:src="@drawable/indent" />
+
+            <ImageView
+                android:id="@+id/action_outdent"
+                style="@style/ImageView"
+                android:contentDescription="@null"
+                android:src="@drawable/outdent" />
+
+            <ImageView
+                android:id="@+id/action_align_left"
+                style="@style/ImageView"
+                android:contentDescription="@null"
+                android:src="@drawable/justify_left" />
+
+            <ImageView
+                android:id="@+id/action_align_center"
+                style="@style/ImageView"
+                android:contentDescription="@null"
+                android:src="@drawable/justify_center" />
+
+            <ImageView
+                android:id="@+id/action_align_right"
+                style="@style/ImageView"
+                android:contentDescription="@null"
+                android:src="@drawable/justify_right" />
+
+            <ImageView
+                android:id="@+id/action_insert_bullets"
+                style="@style/ImageView"
+                android:contentDescription="@null"
+                android:src="@drawable/bullets" />
+
+            <ImageView
+                android:id="@+id/action_insert_numbers"
+                style="@style/ImageView"
+                android:contentDescription="@null"
+                android:src="@drawable/numbers" />
+
+            <ImageView
+                android:id="@+id/action_blockquote"
+                style="@style/ImageView"
+                android:contentDescription="@null"
+                android:src="@drawable/blockquote" />
+
+            <ImageView
+                android:id="@+id/action_insert_image"
+                style="@style/ImageView"
+                android:contentDescription="@null"
+                android:src="@drawable/insert_image" />
+
+            <ImageView
+                android:id="@+id/action_insert_audio"
+                style="@style/ImageView"
+                android:contentDescription="@null"
+                android:src="@drawable/music" />
+
+            <ImageView
+                android:id="@+id/action_insert_video"
+                style="@style/ImageView"
+                android:contentDescription="@null"
+                android:src="@drawable/video" />
+
+            <ImageView
+                android:id="@+id/action_insert_youtube"
+                style="@style/ImageView"
+                android:contentDescription="@null"
+                android:src="@drawable/youtube" />
+
+            <ImageView
+                android:id="@+id/action_insert_link"
+                style="@style/ImageView"
+                android:contentDescription="@null"
+                android:src="@drawable/insert_link" />
+
+            <ImageView
+                android:id="@+id/action_insert_checkbox"
+                style="@style/ImageView"
+                android:src="@android:drawable/checkbox_on_background"
+                tools:ignore="ContentDescription" />
+        </LinearLayout>
+    </HorizontalScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
