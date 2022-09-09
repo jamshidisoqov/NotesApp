@@ -51,7 +51,7 @@
     <jp.wasabeef.richeditor.RichEditor
         android:id="@+id/input_description"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="400dp"
         android:layout_margin="16sp"
         android:background="@color/bg_color"
         android:backgroundTint="@color/bg_color"
@@ -87,7 +87,8 @@
                 android:padding="16dp"
                 android:background="@drawable/bg_image"
                 android:layout_marginHorizontal="4dp"
-                android:src="@drawable/redo" />
+                android:src="@drawable/redo"
+                tools:ignore="ContentDescription" />
 
             <ImageView
                 android:id="@+id/action_bold"

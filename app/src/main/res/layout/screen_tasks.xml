@@ -43,35 +43,20 @@
         app:layout_constraintTop_toTopOf="@id/tv_header_title"
         tools:ignore="ContentDescription" />
 
-    <HorizontalScrollView
-        android:id="@+id/chip_group_category"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list_chips"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:clipToPadding="true"
+        android:orientation="horizontal"
         android:paddingStart="8dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toStartOf="@id/image_category_add"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_header_title"
-        tools:ignore="RtlSymmetry">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <com.google.android.material.chip.Chip
-                style="@style/Widget.MaterialComponents.Chip.Choice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="72dp"
-                android:text="@string/all"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                app:chipBackgroundColor="@color/bg_color"
-                app:chipStrokeColor="@color/white"
-                app:chipStrokeWidth="1dp" />
-
-        </LinearLayout>
-    </HorizontalScrollView>
+        tools:ignore="RtlSymmetry"
+        tools:listitem="@layout/list_item_chip" />
 
     <ImageView
         android:id="@+id/image_place_holder"
@@ -95,14 +80,15 @@
         android:background="@drawable/bg_image"
         android:padding="8dp"
         android:src="@drawable/ic_add"
-        app:layout_constraintBottom_toBottomOf="@id/chip_group_category"
+        app:layout_constraintBottom_toBottomOf="@id/list_chips"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/chip_group_category"
+        app:layout_constraintTop_toTopOf="@id/list_chips"
         tools:ignore="ContentDescription" />
 
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list_task"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:clipToPadding="true"
@@ -110,7 +96,7 @@
         android:padding="8dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/chip_group_category"
+        app:layout_constraintTop_toBottomOf="@id/list_chips"
         tools:listitem="@layout/list_item_tasks" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

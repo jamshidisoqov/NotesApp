@@ -13,6 +13,7 @@
         <item name="android:textColor">@color/white</item>
         <item name="android:textColorHint">@color/hint_color</item>
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
+        <item name="android:navigationBarColor">@color/bg_color</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
@@ -35,5 +36,9 @@
 
     <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@drawable/bg_bottom_sheet_dialog</item>
+    </style>
+
+    <style name="ShapeImageView">
+        <item name="cornerSize">50%</item>
     </style>
 </resources>

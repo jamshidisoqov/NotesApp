@@ -8,12 +8,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import uz.gita.notes_app.R
 import uz.gita.notes_app.data.models.NoteData
 import uz.gita.notes_app.databinding.ScreenAddNotesBinding
 import uz.gita.notes_app.presenter.AddNoteViewModel
 import uz.gita.notes_app.presenter.impl.AddNoteViewModelImpl
+import uz.gita.notes_app.ui.dialogs.ColorDialog
 import uz.gita.notes_app.utils.extensions.changeType
 import uz.gita.notes_app.utils.extensions.getCurrentDate
 
@@ -24,7 +26,15 @@ class AddNoteScreen : Fragment(R.layout.screen_add_notes) {
 
     private val binding: ScreenAddNotesBinding by viewBinding()
 
+    private val args: AddNoteScreenArgs by navArgs()
+
     private val typeList = ArrayList<View>()
+
+    private var color = "#FFFFFF"
+
+    private var isDeg = false
+
+    private var isLog = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,13 +51,27 @@ class AddNoteScreen : Fragment(R.layout.screen_add_notes) {
         viewModel.changesLiveData.observe(viewLifecycleOwner, changesObserver)
 
         binding.inputDescription.setEditorFontColor(Color.WHITE)
+        binding.inputDescription.setPlaceholder("Type something...")
 
         for (i in 0 until group.childCount) {
             val type = group.getChildAt(i)
             type.tag = i + 1
             typeList.add(type)
             type.setOnClickListener {
-                viewModel.changeType(it.tag.toString().toInt())
+                val ty = it.tag.toString().toInt()
+                if (isDeg) {
+                    binding.inputDescription.changeType(ty)
+                    isDeg = false
+                } else if (ty == 6) {
+                    isDeg = true
+                }
+                if (isLog) {
+                    binding.inputDescription.changeType(ty)
+                    isLog = false
+                } else if (ty == 5) {
+                    isLog = true
+                }
+                viewModel.changeType(ty)
             }
         }
 
@@ -60,12 +84,21 @@ class AddNoteScreen : Fragment(R.layout.screen_add_notes) {
         binding.imageSave.setOnClickListener {
             viewModel.saveData(
                 NoteData(
-                    category = 1,
+                    category = args.category,
                     title = binding.inputTitle.text.toString(),
                     description = binding.inputDescription.html,
-                    date = getCurrentDate()
+                    date = getCurrentDate(),
+                    color = color
                 )
             )
+        }
+        binding.actionTxtColor.setOnClickListener {
+            val dialog = ColorDialog()
+            dialog.setSelectedListener {
+                color = it
+                binding.inputDescription.setEditorFontColor(Color.parseColor(it))
+            }
+            dialog.show(childFragmentManager, "color")
         }
     }
 

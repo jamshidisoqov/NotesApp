@@ -55,7 +55,7 @@ class MainScreen : Fragment(R.layout.screen_main) {
     }
 
     private val openTaskObserver = Observer<Unit> {
-        MainScreenDirections.actionMainScreenToTasksScreen()
+        navController.navigate(MainScreenDirections.actionMainScreenToTasksScreen())
     }
 
     private val openOptionObserver = Observer<Unit> {

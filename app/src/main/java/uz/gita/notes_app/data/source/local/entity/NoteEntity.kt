@@ -25,7 +25,8 @@ data class NoteEntity(
     val title: String,
     val description: String,
     val pinned: Int = 0,
-    val date: String
+    val date: String,
+    val color:String
 ) {
-    fun toNoteData() = NoteData(id, category, title, description, pinned, date)
+    fun toNoteData() = NoteData(id, category, title, description, pinned, date,color)
 }

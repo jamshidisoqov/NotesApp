@@ -25,7 +25,8 @@ data class TaskEntity(
     val title: String,
     val description: String,
     val is_checked: Int = 0,
-    val date: String
-){
-    fun toTaskData() = TaskData(id, category, title, description, is_checked, date)
+    val date: String,
+    val color: String
+) {
+    fun toTaskData() = TaskData(id, category, title, description, is_checked, date,color)
 }

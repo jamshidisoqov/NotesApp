@@ -30,7 +30,7 @@ interface NoteDao {
     @Query("SELECT*FROM notes WHERE category=:category")
     fun getAllNotesByCategory(category: Int = 1): Flow<List<NoteEntity>>
 
-    @Query("SELECT*FROM note_category")
+    @Query(" SELECT*FROM note_category")
     fun getAllNotesCategory(): Flow<List<NoteCategoryEntity>>
 
 

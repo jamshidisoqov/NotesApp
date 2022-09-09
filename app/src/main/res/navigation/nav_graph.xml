@@ -33,7 +33,14 @@
         android:id="@+id/tasksScreen"
         android:name="uz.gita.notes_app.ui.task.TasksScreen"
         tools:layout="@layout/screen_tasks"
-        android:label="TasksScreen" />
+        android:label="TasksScreen" >
+        <action
+            android:id="@+id/action_tasksScreen_to_addTaskScreen"
+            app:destination="@id/addTaskScreen" />
+        <action
+            android:id="@+id/action_tasksScreen_to_updateTaskScreen"
+            app:destination="@id/updateTaskScreen" />
+    </fragment>
     <fragment
         android:id="@+id/addNoteScreen"
         tools:layout="@layout/screen_add_notes"
@@ -52,5 +59,24 @@
         <argument
             android:name="note"
             app:argType="uz.gita.notes_app.data.models.NoteData" />
+    </fragment>
+    <fragment
+        android:id="@+id/addTaskScreen"
+        tools:layout="@layout/screen_add_tasks"
+        android:name="uz.gita.notes_app.ui.task.add.AddTaskScreen"
+        android:label="AddTaskScreen" >
+        <argument
+            android:name="category"
+            app:argType="integer"
+            android:defaultValue="1" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateTaskScreen"
+        tools:layout="@layout/screen_update_tasks"
+        android:name="uz.gita.notes_app.ui.task.update.UpdateTaskScreen"
+        android:label="UpdateTaskScreen" >
+        <argument
+            android:name="task"
+            app:argType="uz.gita.notes_app.data.models.TaskData" />
     </fragment>
 </navigation>

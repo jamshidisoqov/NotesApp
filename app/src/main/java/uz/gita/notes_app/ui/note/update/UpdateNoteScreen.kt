@@ -27,6 +27,10 @@ class UpdateNoteScreen : Fragment(R.layout.screen_update_notes) {
 
     private val typeList = ArrayList<View>()
 
+    private var isDeg = false
+
+    private var isLog = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel.backLiveData.observe(this, backObserver)
@@ -42,6 +46,7 @@ class UpdateNoteScreen : Fragment(R.layout.screen_update_notes) {
 
         binding.inputDescription.html = args.note.description
 
+        binding.inputDescription.setEditorFontColor(Color.parseColor(args.note.color))
 
         viewModel.changeTypeLiveData.observe(viewLifecycleOwner, changeTypeObserver)
 
@@ -52,11 +57,22 @@ class UpdateNoteScreen : Fragment(R.layout.screen_update_notes) {
             type.tag = i + 1
             typeList.add(type)
             type.setOnClickListener {
-                viewModel.changeType(it.tag.toString().toInt())
+                val ty = it.tag.toString().toInt()
+                if (isDeg) {
+                    binding.inputDescription.changeType(ty)
+                    isDeg = false
+                } else if (ty == 6) {
+                    isDeg = true
+                }
+                if (isLog) {
+                    binding.inputDescription.changeType(ty)
+                    isLog = false
+                } else if (ty == 5) {
+                    isLog = true
+                }
+                viewModel.changeType(ty)
             }
         }
-
-        binding.inputDescription.setEditorFontColor(Color.WHITE)
 
         binding.imageBack.setOnClickListener {
             viewModel.backClick()
@@ -82,11 +98,11 @@ class UpdateNoteScreen : Fragment(R.layout.screen_update_notes) {
     }
 
     private val saveObserver = Observer<Unit> {
-       findNavController().navigateUp()
+        findNavController().navigateUp()
     }
 
     private val changesObserver = Observer<Pair<Int, Boolean>> {
-        if (it.first > 2) {
+        if (it.first > 1) {
             typeList[it.first].apply {
                 if (it.second) {
                     setBackgroundResource(R.drawable.bg_background)

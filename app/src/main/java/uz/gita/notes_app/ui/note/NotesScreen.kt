@@ -20,6 +20,8 @@ import uz.gita.notes_app.ui.adapters.NotesAdapter
 import uz.gita.notes_app.ui.dialogs.AddCategoryDialog
 import uz.gita.notes_app.ui.dialogs.BottomMenuDialog
 import uz.gita.notes_app.ui.dialogs.DeleteDialog
+import uz.gita.notes_app.utils.extensions.invisible
+import uz.gita.notes_app.utils.extensions.visible
 
 // Created by Jamshid Isoqov an 9/6/2022
 class NotesScreen : Fragment(R.layout.screen_notes) {
@@ -119,6 +121,9 @@ class NotesScreen : Fragment(R.layout.screen_notes) {
         chipAdapter.submitList(noteCategoryList)
     }
     private val notesByCategoryObserver = Observer<List<NoteData>> {
+        if (it.isEmpty()) {
+            viewBinding.imagePlaceHolder.visible()
+        } else viewBinding.imagePlaceHolder.invisible()
         adapter.submitList(it)
     }
 }

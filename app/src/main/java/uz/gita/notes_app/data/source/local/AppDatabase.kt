@@ -19,7 +19,7 @@ import uz.gita.notes_app.data.source.local.entity.TaskEntity
 // Created by Jamshid Isoqov an 9/6/2022
 @Database(
     entities = [NoteCategoryEntity::class, NoteEntity::class, TaskCategoryEntity::class, TaskEntity::class],
-    version = 1
+    version = 4
 )
 abstract class AppDatabase : RoomDatabase() {
 
@@ -37,6 +37,7 @@ abstract class AppDatabase : RoomDatabase() {
                     override fun onCreate(db: SupportSQLiteDatabase) {
                         CoroutineScope(Dispatchers.IO).launch {
                             getInstance().noteDao().insertNoteCategory(NoteCategoryEntity(0, "All"))
+                            getInstance().taskDao().insertTaskCategory(TaskCategoryEntity(0, "All"))
                             cancel()
                         }
                         super.onCreate(db)

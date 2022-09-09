@@ -24,4 +24,27 @@ object Constants {
             )
         }
     }
+
+    fun generateColor():List<String>{
+        val list = ArrayList<String>(256)
+        for (i in 0 until 256) {
+            val builder = StringBuilder()
+            builder.append("#")
+            var j = 0
+            while (j < 6) {
+                when (val num = (Math.random() * 16).toInt()) {
+                    in 0..9 -> {
+                        builder.append(num)
+                    }
+                    else -> {
+                        builder.append((87+num).toChar())
+                    }
+                }
+                j++
+
+            }
+            list.add(builder.toString())
+        }
+        return list
+    }
 }

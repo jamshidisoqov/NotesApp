@@ -21,7 +21,21 @@ class UpdateTaskViewModelImpl : UpdateTaskViewModel, ViewModel() {
 
     override val changeTypeLiveData = eventLiveData<Int>()
 
+    override val changesLiveData = eventLiveData<Pair<Int, Boolean>>()
+
+    override val messageLiveData = eventLiveData<String>()
+
+    private val types = ArrayList<Int>()
+
     override fun changeType(type: Int) {
+        val ty = type - 1
+        if (types.contains(ty)) {
+            types.remove(ty)
+            changesLiveData.value = Pair(ty, false)
+        } else {
+            types.add(ty)
+            changesLiveData.value = Pair(ty, true)
+        }
         changeTypeLiveData.value = type
     }
 
@@ -30,6 +44,16 @@ class UpdateTaskViewModelImpl : UpdateTaskViewModel, ViewModel() {
     }
 
     override fun updateTask(taskData: TaskData) {
+
+        if (taskData.title == "") {
+            messageLiveData.value = "Title is empty, please enter a title"
+            return
+        }
+        if (taskData.description == "") {
+            messageLiveData.value = "Description is empty, please enter a title"
+            return
+        }
+        messageLiveData.value = "Successfully added"
         viewModelScope.launch(Dispatchers.IO) {
             updateTaskUseCase.updateTask(taskData)
             updateLiveData.postValue(Unit)

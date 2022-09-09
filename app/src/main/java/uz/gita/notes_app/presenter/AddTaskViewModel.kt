@@ -12,6 +12,10 @@ interface AddTaskViewModel {
 
     val changeTypeLiveData: LiveData<Int>
 
+    val changesLiveData: LiveData<Pair<Int, Boolean>>
+
+    val messageLiveData:LiveData<String>
+
     fun changeType(type: Int)
 
     fun backClick()

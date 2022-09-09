@@ -8,14 +8,8 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import uz.gita.notes_app.data.models.TaskCategoryData
 import uz.gita.notes_app.data.models.TaskData
-import uz.gita.notes_app.domain.usecase.task.AddTaskCategoryUseCase
-import uz.gita.notes_app.domain.usecase.task.DeleteTaskUseCase
-import uz.gita.notes_app.domain.usecase.task.GetAllTaskCategoryUseCase
-import uz.gita.notes_app.domain.usecase.task.UpdateTaskUseCase
-import uz.gita.notes_app.domain.usecase.task.impl.AddTaskCategoryUseCaseImpl
-import uz.gita.notes_app.domain.usecase.task.impl.DeleteTaskUseCaseImpl
-import uz.gita.notes_app.domain.usecase.task.impl.GetAllTaskCategoryUseCaseImpl
-import uz.gita.notes_app.domain.usecase.task.impl.UpdateTaskUseCaseImpl
+import uz.gita.notes_app.domain.usecase.task.*
+import uz.gita.notes_app.domain.usecase.task.impl.*
 import uz.gita.notes_app.presenter.TasksViewModel
 import uz.gita.notes_app.utils.extensions.emptyLiveData
 import uz.gita.notes_app.utils.extensions.eventLiveData
@@ -28,9 +22,10 @@ class TasksViewModelImpl : TasksViewModel, ViewModel() {
 
     private val deleteTaskUseCase: DeleteTaskUseCase = DeleteTaskUseCaseImpl()
 
-    private val categoryTaskUseCase: GetAllTaskCategoryUseCase = GetAllTaskCategoryUseCaseImpl()
+    private val getAllTasksByCategoryUseCase: GetAllTasksByCategoryUseCase =
+        GetAllTasksByCategoryUseCaseImpl()
 
-    override val backLiveData = emptyLiveData()
+    private val categoryTaskUseCase: GetAllTaskCategoryUseCase = GetAllTaskCategoryUseCaseImpl()
 
     override val searchLiveData = emptyLiveData()
 
@@ -47,6 +42,15 @@ class TasksViewModelImpl : TasksViewModel, ViewModel() {
     override val addCategoryLiveData = emptyLiveData()
 
     override val categoryListLiveData = eventLiveData<List<TaskCategoryData>>()
+
+    init {
+        categoryTaskUseCase.getAllTaskCategory()
+            .onEach {
+                categoryListLiveData.value = it
+                categoryClick(it[0].id)
+            }
+            .launchIn(viewModelScope)
+    }
 
     override fun addCategoryClick() {
         addCategoryLiveData.value = Unit
@@ -78,19 +82,20 @@ class TasksViewModelImpl : TasksViewModel, ViewModel() {
         }
     }
 
-    override fun categoryClick(categoryData: TaskCategoryData) {
+    override fun categoryClick(category: Int) {
         viewModelScope.launch {
-            categoryTaskUseCase.getAllTaskCategory().onEach {
-                categoryListLiveData.value = it
-            }.launchIn(this)
+            getAllTasksByCategoryUseCase.getAllTaskByCategory(category)
+                .onEach {
+                    taskLiveData.value = it
+                }.launchIn(this)
         }
-    }
-
-    override fun backClick() {
-        backLiveData.value = Unit
     }
 
     override fun addTask() {
         addTaskLiveData.value = Unit
+    }
+
+    override fun supportClick() {
+        supportLiveData.value = Unit
     }
 }

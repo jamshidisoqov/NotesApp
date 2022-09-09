@@ -26,20 +26,23 @@
         <entry key="..\:/Users/Jamshid/AndroidStudioProjects/NotesApp/app/src/main/res/drawable/ic_trash.xml" value="0.134" />
         <entry key="..\:/Users/Jamshid/AndroidStudioProjects/NotesApp/app/src/main/res/layout/activity_main.xml" value="0.2039333048311244" />
         <entry key="..\:/Users/Jamshid/AndroidStudioProjects/NotesApp/app/src/main/res/layout/dialog_add_category.xml" value="0.20307823856348867" />
+        <entry key="..\:/Users/Jamshid/AndroidStudioProjects/NotesApp/app/src/main/res/layout/dialog_colors.xml" value="0.20307823856348867" />
         <entry key="..\:/Users/Jamshid/AndroidStudioProjects/NotesApp/app/src/main/res/layout/dialog_delete_note.xml" value="0.2013507809202195" />
         <entry key="..\:/Users/Jamshid/AndroidStudioProjects/NotesApp/app/src/main/res/layout/dialog_menu_bottom.xml" value="0.2039333048311244" />
         <entry key="..\:/Users/Jamshid/AndroidStudioProjects/NotesApp/app/src/main/res/layout/dialog_save_changes.xml" value="0.2039333048311244" />
         <entry key="..\:/Users/Jamshid/AndroidStudioProjects/NotesApp/app/src/main/res/layout/list_item_chip.xml" value="0.2" />
+        <entry key="..\:/Users/Jamshid/AndroidStudioProjects/NotesApp/app/src/main/res/layout/list_item_color.xml" value="0.2039333048311244" />
         <entry key="..\:/Users/Jamshid/AndroidStudioProjects/NotesApp/app/src/main/res/layout/list_item_notes.xml" value="0.176" />
         <entry key="..\:/Users/Jamshid/AndroidStudioProjects/NotesApp/app/src/main/res/layout/list_item_tasks.xml" value="0.4" />
         <entry key="..\:/Users/Jamshid/AndroidStudioProjects/NotesApp/app/src/main/res/layout/sceen_main.xml" value="0.2013507809202195" />
         <entry key="..\:/Users/Jamshid/AndroidStudioProjects/NotesApp/app/src/main/res/layout/screen_about.xml" value="0.59375" />
         <entry key="..\:/Users/Jamshid/AndroidStudioProjects/NotesApp/app/src/main/res/layout/screen_add_notes.xml" value="0.2" />
         <entry key="..\:/Users/Jamshid/AndroidStudioProjects/NotesApp/app/src/main/res/layout/screen_add_tasks.xml" value="0.176" />
+        <entry key="..\:/Users/Jamshid/AndroidStudioProjects/NotesApp/app/src/main/res/layout/screen_main.xml" value="0.2039333048311244" />
         <entry key="..\:/Users/Jamshid/AndroidStudioProjects/NotesApp/app/src/main/res/layout/screen_notes.xml" value="0.2" />
-        <entry key="..\:/Users/Jamshid/AndroidStudioProjects/NotesApp/app/src/main/res/layout/screen_tasks.xml" value="0.152" />
+        <entry key="..\:/Users/Jamshid/AndroidStudioProjects/NotesApp/app/src/main/res/layout/screen_tasks.xml" value="0.2" />
         <entry key="..\:/Users/Jamshid/AndroidStudioProjects/NotesApp/app/src/main/res/layout/screen_update_notes.xml" value="0.2" />
-        <entry key="..\:/Users/Jamshid/AndroidStudioProjects/NotesApp/app/src/main/res/layout/screen_update_tasks.xml" value="0.24739583333333334" />
+        <entry key="..\:/Users/Jamshid/AndroidStudioProjects/NotesApp/app/src/main/res/layout/screen_update_tasks.xml" value="0.176" />
       </map>
     </option>
   </component>

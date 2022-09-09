@@ -15,4 +15,5 @@
     <string name="no">No</string>
     <string name="add_category">Add category</string>
     <string name="name">Name</string>
+    <string name="choose_color">Choose color…</string>
 </resources>

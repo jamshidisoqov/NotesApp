@@ -8,8 +8,6 @@ import uz.gita.notes_app.data.models.TaskData
 
 interface TasksViewModel {
 
-    val backLiveData: LiveData<Unit>
-
     val searchLiveData: LiveData<Unit>
 
     val supportLiveData: LiveData<Unit>
@@ -38,9 +36,9 @@ interface TasksViewModel {
 
     fun deleteTask(taskData: TaskData)
 
-    fun categoryClick(categoryData: TaskCategoryData)
-
-    fun backClick()
+    fun categoryClick(category:Int)
 
     fun addTask()
+
+    fun supportClick()
 }
