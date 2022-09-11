@@ -88,7 +88,8 @@ class AddNoteScreen : Fragment(R.layout.screen_add_notes) {
                     title = binding.inputTitle.text.toString(),
                     description = binding.inputDescription.html,
                     date = getCurrentDate(),
-                    color = color
+                    color = color,
+                    tag = binding.inputTag.text.toString()
                 )
             )
         }

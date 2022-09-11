@@ -6,6 +6,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import uz.gita.notes_app.data.models.TaskCategoryData
 import uz.gita.notes_app.data.models.TaskData
 import uz.gita.notes_app.domain.usecase.task.*
@@ -20,10 +21,10 @@ class TasksViewModelImpl : TasksViewModel, ViewModel() {
 
     private val addTaskUseCase: AddTaskCategoryUseCase = AddTaskCategoryUseCaseImpl()
 
-    private val deleteTaskUseCase: DeleteTaskUseCase = DeleteTaskUseCaseImpl()
-
     private val getAllTasksByCategoryUseCase: GetAllTasksByCategoryUseCase =
         GetAllTasksByCategoryUseCaseImpl()
+
+    private val deleteTaskCategory: DeleteTaskCategoryUseCase = DeleteTaskCategoryUseCaseImpl()
 
     private val categoryTaskUseCase: GetAllTaskCategoryUseCase = GetAllTaskCategoryUseCaseImpl()
 
@@ -43,13 +44,19 @@ class TasksViewModelImpl : TasksViewModel, ViewModel() {
 
     override val categoryListLiveData = eventLiveData<List<TaskCategoryData>>()
 
+    override val basketLiveData = emptyLiveData()
+
+    override val deleteCategoryLiveData = eventLiveData<TaskCategoryData>()
+
     init {
-        categoryTaskUseCase.getAllTaskCategory()
-            .onEach {
-                categoryListLiveData.value = it
-                categoryClick(it[0].id)
-            }
-            .launchIn(viewModelScope)
+        viewModelScope.launch {
+            categoryTaskUseCase.getAllTaskCategory()
+                .onEach {
+                    categoryListLiveData.value = it
+                    if (it.isNotEmpty())
+                    categoryClick(it[0].id)
+                }.launchIn(this)
+        }
     }
 
     override fun addCategoryClick() {
@@ -78,7 +85,7 @@ class TasksViewModelImpl : TasksViewModel, ViewModel() {
 
     override fun deleteTask(taskData: TaskData) {
         viewModelScope.launch(Dispatchers.IO) {
-            deleteTaskUseCase.deleteTask(taskData)
+            updateTaskUseCase.updateTask(taskData.copy(status = 2))
         }
     }
 
@@ -95,7 +102,27 @@ class TasksViewModelImpl : TasksViewModel, ViewModel() {
         addTaskLiveData.value = Unit
     }
 
+    override fun basketClicked() {
+        basketLiveData.value = Unit
+    }
+
     override fun supportClick() {
         supportLiveData.value = Unit
+    }
+
+    override fun deleteCategoryClick(taskCategoryData: TaskCategoryData) {
+        deleteCategoryLiveData.value = taskCategoryData
+    }
+
+    override fun deleteCategory(taskCategoryData: TaskCategoryData) {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                deleteTaskCategory.deleteTaskCategory(taskCategoryData)
+            }
+        }
+    }
+
+    override fun searchClicked() {
+        searchLiveData.value = Unit
     }
 }

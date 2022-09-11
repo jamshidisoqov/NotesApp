@@ -36,11 +36,28 @@
         android:layout_marginEnd="16dp"
         android:background="@drawable/bg_image"
         android:padding="13dp"
+        android:tooltipText="@string/search"
         android:src="@drawable/ic_search"
         app:layout_constraintBottom_toBottomOf="@id/tv_header_title"
         app:layout_constraintEnd_toStartOf="@id/image_support"
         app:layout_constraintTop_toTopOf="@id/tv_header_title"
-        tools:ignore="ContentDescription" />
+        tools:ignore="ContentDescription"
+        tools:targetApi="o" />
+
+    <ImageView
+        android:id="@+id/image_basket"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/bg_image"
+        android:padding="13dp"
+        android:src="@drawable/ic_basket"
+        android:tooltipText="@string/recycle_bin"
+        app:layout_constraintBottom_toBottomOf="@id/tv_header_title"
+        app:layout_constraintEnd_toStartOf="@id/image_search"
+        app:layout_constraintTop_toTopOf="@id/tv_header_title"
+        tools:ignore="ContentDescription"
+        tools:targetApi="o" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_chips"

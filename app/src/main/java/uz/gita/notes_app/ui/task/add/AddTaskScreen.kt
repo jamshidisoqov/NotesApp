@@ -89,7 +89,8 @@ class AddTaskScreen : Fragment(R.layout.screen_add_tasks) {
                     title = vieBinding.inputTitle.text.toString(),
                     description = vieBinding.inputDescription.html,
                     date = getCurrentDate(),
-                    color = color
+                    color = color,
+                    tag = vieBinding.inputTag.text.toString()
                 )
             )
         }

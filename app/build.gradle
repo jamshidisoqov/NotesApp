@@ -10,7 +10,7 @@ android {
     compileSdk 32
 
     defaultConfig {
-        applicationId "uz.gita.notes_app"
+        applicationId "uz.gita.notes_app_io"
         minSdk 21
         targetSdk 32
         versionCode 1
@@ -77,11 +77,15 @@ dependencies {
 
     //image picker
     implementation 'com.github.Drjacky:ImagePicker:2.1.16'
+
     //glide
     implementation 'com.github.bumptech.glide:glide:4.13.2'
     kapt 'com.github.bumptech.glide:compiler:4.13.2'
+
     //Timber
     implementation 'com.jakewharton.timber:timber:5.0.1'
+
     //rich edit text
     implementation 'jp.wasabeef:richeditor-android:2.0.0'
+
 }

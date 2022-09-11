@@ -58,6 +58,14 @@ class NotesScreen : Fragment(R.layout.screen_notes) {
             viewModel.addNote()
         }
 
+        viewBinding.imageSearch.setOnClickListener {
+            viewModel.searchClick()
+        }
+
+        viewBinding.imageBasket.setOnClickListener {
+            viewModel.basketClicked()
+        }
+
         viewBinding.imageCategoryAdd.setOnClickListener {
             viewModel.addCategoryClick()
         }
@@ -71,7 +79,12 @@ class NotesScreen : Fragment(R.layout.screen_notes) {
         chipAdapter.setItemClickListener {
             viewModel.categoryClick(it)
         }
+        chipAdapter.setDeleteListener {
+            viewModel.categoryDeleteClick(it)
+        }
         subscribeUiDataObservers()
+        viewModel.categoryClick(chipAdapter.selectedCategoryId)
+
     }
 
     private fun subscribeOneShotObservers() {
@@ -81,7 +94,10 @@ class NotesScreen : Fragment(R.layout.screen_notes) {
         viewModel.deleteNoteLiveData.observe(this, deleteObserver)
         viewModel.searchLiveData.observe(this, searchObserver)
         viewModel.supportLiveData.observe(this, supportObserver)
+        viewModel.openTrashLiveData.observe(this, openTrashObserver)
+        viewModel.deleteCategoryLiveData.observe(this,deleteCategoryListener)
     }
+
 
     private fun subscribeUiDataObservers() {
         viewModel.categoryListLiveData.observe(viewLifecycleOwner, categoryListObserver)
@@ -89,18 +105,22 @@ class NotesScreen : Fragment(R.layout.screen_notes) {
     }
 
     private val searchObserver = Observer<Unit> {
-        //find search
+        navController.navigate(NotesScreenDirections.actionNotesScreenToSearchNoteScreen())
     }
+
     private val supportObserver = Observer<Unit> {
         val dialog = BottomMenuDialog()
         dialog.show(childFragmentManager, "notes")
     }
+
     private val addNoteObserver = Observer<Unit> {
         navController.navigate(NotesScreenDirections.actionNotesScreenToAddNoteScreen(chipAdapter.selectedCategoryId))
     }
+
     private val updateNote = Observer<NoteData> {
         navController.navigate(NotesScreenDirections.actionNotesScreenToUpdateNoteScreen(it))
     }
+
     private val deleteObserver = Observer<NoteData> {
         val dialog = DeleteDialog(requireContext())
         dialog.show()
@@ -108,6 +128,19 @@ class NotesScreen : Fragment(R.layout.screen_notes) {
             viewModel.deleteNote(it)
         }
     }
+
+    private val openTrashObserver = Observer<Unit> {
+        navController.navigate(NotesScreenDirections.actionNotesScreenToTrashNoteScreen())
+    }
+
+    private val deleteCategoryListener = Observer<NoteCategoryData> {
+        val dialog = DeleteDialog(requireContext())
+        dialog.show()
+        dialog.setDeleteListener {
+            viewModel.deleteCategory(it)
+        }
+    }
+
     private val addCategoryObserver = Observer<Unit> {
         val dialog = AddCategoryDialog(requireContext())
         dialog.setSavedListener {
@@ -120,6 +153,7 @@ class NotesScreen : Fragment(R.layout.screen_notes) {
     private val categoryListObserver = Observer<List<NoteCategoryData>> { noteCategoryList ->
         chipAdapter.submitList(noteCategoryList)
     }
+
     private val notesByCategoryObserver = Observer<List<NoteData>> {
         if (it.isEmpty()) {
             viewBinding.imagePlaceHolder.visible()

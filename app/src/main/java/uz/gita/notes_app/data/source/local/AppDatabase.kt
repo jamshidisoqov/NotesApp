@@ -7,7 +7,6 @@ import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import uz.gita.notes_app.data.source.local.dao.NoteDao
 import uz.gita.notes_app.data.source.local.dao.TaskDao
@@ -19,7 +18,7 @@ import uz.gita.notes_app.data.source.local.entity.TaskEntity
 // Created by Jamshid Isoqov an 9/6/2022
 @Database(
     entities = [NoteCategoryEntity::class, NoteEntity::class, TaskCategoryEntity::class, TaskEntity::class],
-    version = 4
+    version = 7
 )
 abstract class AppDatabase : RoomDatabase() {
 
@@ -38,7 +37,6 @@ abstract class AppDatabase : RoomDatabase() {
                         CoroutineScope(Dispatchers.IO).launch {
                             getInstance().noteDao().insertNoteCategory(NoteCategoryEntity(0, "All"))
                             getInstance().taskDao().insertTaskCategory(TaskCategoryEntity(0, "All"))
-                            cancel()
                         }
                         super.onCreate(db)
                     }

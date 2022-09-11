@@ -19,4 +19,14 @@ interface TaskRepository {
 
     fun getAllTaskCategory(): Flow<List<TaskCategoryData>>
 
+    fun search(query: String): Flow<List<TaskData>>
+
+    fun getAllTrashes():Flow<List<TaskData>>
+
+    suspend fun clearTrashes()
+
+    suspend fun deleteTaskCategory(taskCategoryData: TaskCategoryData)
+
+    fun getAllTags():Flow<List<String>>
+
 }

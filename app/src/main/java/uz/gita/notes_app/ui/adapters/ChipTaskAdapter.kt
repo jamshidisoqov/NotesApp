@@ -5,10 +5,11 @@ import android.graphics.Color
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import uz.gita.notes_app.R
-import uz.gita.notes_app.data.models.NoteCategoryData
 import uz.gita.notes_app.data.models.TaskCategoryData
 import uz.gita.notes_app.databinding.ListItemChipBinding
+import uz.gita.notes_app.utils.extensions.gone
 import uz.gita.notes_app.utils.extensions.inflate
+import uz.gita.notes_app.utils.extensions.visible
 
 // Created by Jamshid Isoqov an 9/7/2022
 class ChipTaskAdapter : RecyclerView.Adapter<ChipTaskAdapter.ViewHolder>() {
@@ -18,7 +19,8 @@ class ChipTaskAdapter : RecyclerView.Adapter<ChipTaskAdapter.ViewHolder>() {
     var selectedPosition = 0
 
     val selectedCategoryId: Int
-        get() = notesCategoryList[selectedPosition].id
+        get() =
+            notesCategoryList[selectedPosition].id
 
     private var itemClickListener: ((Int) -> Unit)? = null
 
@@ -32,6 +34,12 @@ class ChipTaskAdapter : RecyclerView.Adapter<ChipTaskAdapter.ViewHolder>() {
         notifyDataSetChanged()
     }
 
+    private var itemDeleteListener: ((TaskCategoryData) -> Unit)? = null
+
+    fun setDeleteListener(block: (TaskCategoryData) -> Unit) {
+        itemDeleteListener = block
+    }
+
     inner class ViewHolder(private val binding: ListItemChipBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
@@ -41,6 +49,15 @@ class ChipTaskAdapter : RecyclerView.Adapter<ChipTaskAdapter.ViewHolder>() {
                 notifyItemChanged(selectedPosition)
                 selectedPosition = absoluteAdapterPosition
                 notifyItemChanged(absoluteAdapterPosition)
+            }
+
+            binding.root.setOnLongClickListener {
+                if (absoluteAdapterPosition != 0 && selectedPosition != absoluteAdapterPosition)
+                    binding.imageDelete.visible()
+                true
+            }
+            binding.imageDelete.setOnClickListener {
+                itemDeleteListener?.invoke(notesCategoryList[absoluteAdapterPosition])
             }
         }
 
@@ -53,6 +70,7 @@ class ChipTaskAdapter : RecyclerView.Adapter<ChipTaskAdapter.ViewHolder>() {
                 binding.tvChip.setBackgroundResource(R.drawable.bg_chip_unselected)
                 binding.tvChip.setTextColor(Color.WHITE)
             }
+            binding.imageDelete.gone()
         }
 
     }

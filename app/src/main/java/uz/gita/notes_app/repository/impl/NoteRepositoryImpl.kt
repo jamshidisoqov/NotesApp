@@ -23,11 +23,19 @@ class NoteRepositoryImpl private constructor() : NoteRepository {
         dao.insertNoteCategory(noteCategoryData.toNoteCategoryEntity())
 
     override fun getAllNoteByCategory(category: Int): Flow<List<NoteData>> =
-        dao.getAllNotesByCategory(category).map { noteList ->
-            noteList.map { noteEntity ->
-                noteEntity.toNoteData()
-            }
-        }.flowOn(Dispatchers.IO)
+        if (category != 1) {
+            dao.getAllNotesByCategory(category).map { noteList ->
+                noteList.map { noteEntity ->
+                    noteEntity.toNoteData()
+                }
+            }.flowOn(Dispatchers.IO)
+        } else {
+            dao.getAllNotes().map { noteList ->
+                noteList.map { noteEntity ->
+                    noteEntity.toNoteData()
+                }
+            }.flowOn(Dispatchers.IO)
+        }
 
     override fun getAllNoteCategory(): Flow<List<NoteCategoryData>> =
         dao.getAllNotesCategory().map { noteCategoryList ->
@@ -35,6 +43,27 @@ class NoteRepositoryImpl private constructor() : NoteRepository {
                 noteCategoryEntity.toNoteCategoryData()
             }
         }.flowOn(Dispatchers.IO)
+
+    override fun getAllTrash(): Flow<List<NoteData>> = dao.getAllTrashes()
+        .map { trashList ->
+            trashList.map {
+                it.toNoteData()
+            }
+        }.flowOn(Dispatchers.IO)
+
+    override fun searchNotes(query: String): Flow<List<NoteData>> =
+        dao.search(query).map { notes ->
+            notes.map { noteEntity ->
+                noteEntity.toNoteData()
+            }
+        }.flowOn(Dispatchers.IO)
+
+    override fun getAllTags(): Flow<List<String>> = dao.getAllTags()
+
+    override suspend fun deleteAllTrashNotes() = dao.deleteAllTrashNotes()
+
+    override suspend fun deleteNoteCategory(noteCategoryData: NoteCategoryData) =
+        dao.deleteNoteCategory(noteCategoryData.toNoteCategoryEntity())
 
     companion object {
         private lateinit var instance: NoteRepository

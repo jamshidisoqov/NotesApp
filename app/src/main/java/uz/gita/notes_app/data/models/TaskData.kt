@@ -13,7 +13,10 @@ data class TaskData(
     val description: String,
     val is_checked: Int = 0,
     val date: String,
-    val color: String = "#FFFFFF"
+    val color: String = "#FFFFFF",
+    val status: Int = 1,
+    val tag: String
 ) : Parcelable {
-    fun toTaskEntity() = TaskEntity(id, category, title, description, is_checked, date, color)
+    fun toTaskEntity() =
+        TaskEntity(id, category, title, description, is_checked, date, color, status,tag)
 }

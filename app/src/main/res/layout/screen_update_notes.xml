@@ -53,12 +53,32 @@
         android:layout_width="match_parent"
         android:layout_height="400dp"
         android:layout_margin="16sp"
+        android:padding="16dp"
         android:background="@color/bg_color"
         android:backgroundTint="@color/bg_color"
         android:minHeight="72dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/input_title" />
+        app:layout_constraintTop_toBottomOf="@id/input_tag" />
+
+    <EditText
+        android:id="@+id/input_tag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16sp"
+        android:layout_marginTop="16dp"
+        android:background="@color/bg_color"
+        android:hint="@string/tag"
+        android:inputType="text"
+        android:maxLines="1"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="12dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/hint_color"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/input_title"
+        tools:ignore="Autofill" />
+
 
     <HorizontalScrollView
         android:layout_width="match_parent"
@@ -75,27 +95,27 @@
             <ImageView
                 android:id="@+id/action_undo"
                 style="@style/ImageView"
-                android:background="@drawable/bg_image"
                 android:layout_marginHorizontal="4dp"
-                android:padding="16dp"
+                android:background="@drawable/bg_image"
                 android:contentDescription="@null"
+                android:padding="16dp"
                 android:src="@drawable/undo" />
 
             <ImageView
                 android:id="@+id/action_redo"
                 style="@style/ImageView"
-                android:padding="16dp"
-                android:background="@drawable/bg_image"
                 android:layout_marginHorizontal="4dp"
+                android:background="@drawable/bg_image"
+                android:padding="16dp"
                 android:src="@drawable/redo"
                 tools:ignore="ContentDescription" />
 
             <ImageView
                 android:id="@+id/action_bold"
                 style="@style/ImageView"
-                android:padding="16dp"
                 android:layout_marginHorizontal="4dp"
                 android:contentDescription="@null"
+                android:padding="16dp"
                 android:src="@drawable/bold" />
 
             <ImageView
@@ -183,42 +203,34 @@
             <ImageView
                 android:id="@+id/action_txt_color"
                 style="@style/ImageView"
-                android:padding="12dp"
                 android:layout_marginHorizontal="4dp"
                 android:contentDescription="@null"
+                android:padding="12dp"
                 android:src="@drawable/txt_color" />
-
-            <ImageView
-                android:id="@+id/action_bg_color"
-                style="@style/ImageView"
-                android:layout_marginHorizontal="4dp"
-                android:contentDescription="@null"
-                android:padding="12dp"
-                android:src="@drawable/bg_color" />
 
 
             <ImageView
                 android:id="@+id/action_indent"
                 style="@style/ImageView"
                 android:layout_marginHorizontal="4dp"
-                android:padding="12dp"
                 android:contentDescription="@null"
+                android:padding="12dp"
                 android:src="@drawable/indent" />
 
             <ImageView
                 android:id="@+id/action_outdent"
                 style="@style/ImageView"
                 android:layout_marginHorizontal="4dp"
-                android:padding="12dp"
                 android:contentDescription="@null"
+                android:padding="12dp"
                 android:src="@drawable/outdent" />
 
             <ImageView
                 android:id="@+id/action_align_left"
                 style="@style/ImageView"
                 android:layout_marginHorizontal="4dp"
-                android:padding="12dp"
                 android:contentDescription="@null"
+                android:padding="12dp"
                 android:src="@drawable/justify_left" />
 
             <ImageView
@@ -232,50 +244,37 @@
             <ImageView
                 android:id="@+id/action_align_right"
                 style="@style/ImageView"
-                android:padding="12dp"
                 android:layout_marginHorizontal="4dp"
                 android:contentDescription="@null"
+                android:padding="12dp"
                 android:src="@drawable/justify_right" />
 
             <ImageView
                 android:id="@+id/action_insert_bullets"
                 style="@style/ImageView"
                 android:layout_marginHorizontal="4dp"
-                android:padding="12dp"
                 android:contentDescription="@null"
+                android:padding="12dp"
                 android:src="@drawable/bullets" />
 
             <ImageView
                 android:id="@+id/action_insert_numbers"
                 style="@style/ImageView"
                 android:layout_marginHorizontal="4dp"
-                android:padding="12dp"
                 android:contentDescription="@null"
+                android:padding="12dp"
                 android:src="@drawable/numbers" />
 
             <ImageView
                 android:id="@+id/action_blockquote"
                 style="@style/ImageView"
                 android:layout_marginHorizontal="4dp"
-                android:padding="12dp"
                 android:contentDescription="@null"
+                android:padding="12dp"
                 android:src="@drawable/blockquote" />
 
-            <ImageView
-                android:id="@+id/action_insert_link"
-                style="@style/ImageView"
-                android:layout_marginHorizontal="4dp"
-                android:contentDescription="@null"
-                android:padding="10dp"
-                android:src="@drawable/insert_link" />
-
-            <ImageView
-                android:id="@+id/action_insert_checkbox"
-                style="@style/ImageView"
-                android:layout_marginHorizontal="4dp"
-                android:src="@android:drawable/checkbox_on_background"
-                tools:ignore="ContentDescription" />
         </LinearLayout>
     </HorizontalScrollView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

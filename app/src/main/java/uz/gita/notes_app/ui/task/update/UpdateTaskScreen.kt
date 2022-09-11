@@ -14,6 +14,7 @@ import uz.gita.notes_app.R
 import uz.gita.notes_app.databinding.ScreenUpdateTasksBinding
 import uz.gita.notes_app.presenter.UpdateTaskViewModel
 import uz.gita.notes_app.presenter.impl.UpdateTaskViewModelImpl
+import uz.gita.notes_app.ui.dialogs.ColorDialog
 import uz.gita.notes_app.utils.extensions.changeType
 
 // Created by Jamshid Isoqov an 9/6/2022
@@ -26,6 +27,8 @@ class UpdateTaskScreen : Fragment(R.layout.screen_update_tasks) {
     private val args: UpdateTaskScreenArgs by navArgs()
 
     private val typeList = ArrayList<View>()
+
+    private var color = "#FFFFFF"
 
     private var isDeg = false
 
@@ -45,6 +48,8 @@ class UpdateTaskScreen : Fragment(R.layout.screen_update_tasks) {
         binding.inputTitle.setText(args.task.title)
 
         binding.inputDescription.html = args.task.description
+
+        binding.inputTag.setText(args.task.tag)
 
         viewModel.changeTypeLiveData.observe(viewLifecycleOwner, changeTypeObserver)
 
@@ -74,6 +79,15 @@ class UpdateTaskScreen : Fragment(R.layout.screen_update_tasks) {
             }
         }
 
+        binding.actionTxtColor.setOnClickListener {
+            val dialog = ColorDialog()
+            dialog.setSelectedListener {
+                color = it
+                binding.inputDescription.setEditorFontColor(Color.parseColor(it))
+            }
+            dialog.show(childFragmentManager, "color")
+        }
+
         binding.imageBack.setOnClickListener {
             viewModel.backClick()
         }
@@ -82,7 +96,8 @@ class UpdateTaskScreen : Fragment(R.layout.screen_update_tasks) {
             viewModel.updateTask(
                 args.task.copy(
                     title = binding.inputTitle.text.toString(),
-                    description = binding.inputDescription.html
+                    description = binding.inputDescription.html,
+                    tag = binding.inputTag.text.toString()
                 )
             )
         }

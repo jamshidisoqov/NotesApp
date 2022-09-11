@@ -18,8 +18,14 @@ class TaskAdapter : ListAdapter<TaskData, TaskAdapter.ViewHolder>(itemTaskCallba
 
     private var checkedListener: ((TaskData) -> Unit)? = null
 
+    private var deleteListener: ((TaskData) -> Unit)? = null
+
     fun setEditListener(block: (TaskData) -> Unit) {
         editListener = block
+    }
+
+    fun setDeleteListener(block: (TaskData) -> Unit) {
+        deleteListener = block
     }
 
     fun setCheckedListener(block: (TaskData) -> Unit) {
@@ -35,6 +41,9 @@ class TaskAdapter : ListAdapter<TaskData, TaskAdapter.ViewHolder>(itemTaskCallba
             }
             binding.checkboxTask.setOnClickListener {
                 checkedListener?.invoke(getItem(absoluteAdapterPosition).copy(is_checked = if (binding.checkboxTask.isChecked) 1 else 0))
+            }
+            binding.imageDelete.setOnClickListener {
+                deleteListener?.invoke(getItem(absoluteAdapterPosition))
             }
         }
 

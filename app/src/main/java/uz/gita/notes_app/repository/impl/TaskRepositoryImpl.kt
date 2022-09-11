@@ -23,11 +23,19 @@ class TaskRepositoryImpl private constructor() : TaskRepository {
         dao.insertTaskCategory(taskCategoryData.toTaskCategoryEntity())
 
     override fun getAllTasksByCategory(category: Int): Flow<List<TaskData>> =
-        dao.getAllTasksByCategory(category).map { taskList ->
-            taskList.map { taskEntity ->
-                taskEntity.toTaskData()
-            }
-        }.flowOn(Dispatchers.IO)
+        if (category != 1) {
+            dao.getAllTasksByCategory(category).map { taskList ->
+                taskList.map { taskEntity ->
+                    taskEntity.toTaskData()
+                }
+            }.flowOn(Dispatchers.IO)
+        } else {
+            dao.getAllTasks().map { taskList ->
+                taskList.map { taskEntity ->
+                    taskEntity.toTaskData()
+                }
+            }.flowOn(Dispatchers.IO)
+        }
 
     override fun getAllTaskCategory(): Flow<List<TaskCategoryData>> =
         dao.getAllCategory().map { taskCategoryList ->
@@ -35,6 +43,26 @@ class TaskRepositoryImpl private constructor() : TaskRepository {
                 taskCategoryEntity.toTaskCategoryData()
             }
         }.flowOn(Dispatchers.IO)
+
+    override fun search(query: String): Flow<List<TaskData>> =
+        dao.search(query).map { tasks ->
+            tasks.map {
+                it.toTaskData()
+            }
+        }.flowOn(Dispatchers.IO)
+
+    override fun getAllTrashes(): Flow<List<TaskData>> = dao.getAllTrashes().map { trashList ->
+        trashList.map { taskEntity ->
+            taskEntity.toTaskData()
+        }
+    }
+
+    override suspend fun clearTrashes() = dao.clearTrashes()
+
+    override suspend fun deleteTaskCategory(taskCategoryData: TaskCategoryData) =
+        dao.deleteTaskCategory(taskCategoryData.toTaskCategoryEntity())
+
+    override fun getAllTags(): Flow<List<String>>  = dao.getAllTags()
 
     companion object {
         private lateinit var instance: TaskRepository

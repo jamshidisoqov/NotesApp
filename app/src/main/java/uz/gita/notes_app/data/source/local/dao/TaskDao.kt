@@ -24,10 +24,29 @@ interface TaskDao {
     @Delete
     suspend fun deleteTask(taskList: List<TaskEntity>)
 
-    @Query("SELECT * FROM tasks WHERE category=:category")
+    @Delete
+    suspend fun deleteTaskCategory(taskCategoryEntity: TaskCategoryEntity)
+
+    @Query("SELECT * FROM tasks WHERE category=:category AND status = 1")
     fun getAllTasksByCategory(category: Int = 1): Flow<List<TaskEntity>>
 
     @Query("SELECT*FROM task_category")
     fun getAllCategory(): Flow<List<TaskCategoryEntity>>
+
+    @Query("SELECT*FROM tasks WHERE title LIKE '%' || :query || '%' AND status = 1 OR tag LIKE '%' || :query || '%'")
+    fun search(query: String): Flow<List<TaskEntity>>
+
+    @Query("SELECT*FROM tasks WHERE status = 1")
+    fun getAllTasks(): Flow<List<TaskEntity>>
+
+    @Query("SELECT*FROM tasks WHERE status = 2")
+    fun getAllTrashes(): Flow<List<TaskEntity>>
+
+    @Query("DELETE FROM tasks WHERE status=2")
+    suspend fun clearTrashes()
+
+    @Query("SELECT tag FROM tasks WHERE status = 1 AND NOT(tag isNull or tag ='')")
+    fun getAllTags(): Flow<List<String>>
+
 
 }

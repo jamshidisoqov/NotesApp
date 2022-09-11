@@ -1,14 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/tv_chip"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="8dp"
     android:layout_marginVertical="4dp"
     android:background="@drawable/bg_chip_unselected"
-    android:gravity="center"
-    android:minWidth="72dp"
-    android:paddingHorizontal="16dp"
-    android:paddingVertical="8dp"
-    tools:text="Shopping" />
+    android:gravity="center">
+
+    <TextView
+        android:id="@+id/tv_chip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:minWidth="72dp"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="8dp"
+        tools:text="Shopping" />
+
+    <ImageView
+        android:id="@+id/image_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/bg_image"
+        android:src="@drawable/ic_close"
+        android:visibility="gone"
+        tools:ignore="ContentDescription" />
+</LinearLayout>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@color/bg_color">
 
     <ImageView
@@ -59,7 +59,26 @@
         android:minHeight="72dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/input_title" />
+        app:layout_constraintTop_toBottomOf="@id/input_tag" />
+
+    <EditText
+        android:id="@+id/input_tag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16sp"
+        android:layout_marginTop="16dp"
+        android:background="@color/bg_color"
+        android:hint="@string/tag"
+        android:inputType="text"
+        android:maxLines="1"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="12dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/hint_color"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/input_title"
+        tools:ignore="Autofill" />
+
 
     <HorizontalScrollView
         android:layout_width="match_parent"
@@ -189,14 +208,6 @@
                 android:padding="12dp"
                 android:src="@drawable/txt_color" />
 
-            <ImageView
-                android:id="@+id/action_bg_color"
-                style="@style/ImageView"
-                android:layout_marginHorizontal="4dp"
-                android:contentDescription="@null"
-                android:padding="12dp"
-                android:src="@drawable/bg_color" />
-
 
             <ImageView
                 android:id="@+id/action_indent"
@@ -262,13 +273,6 @@
                 android:padding="12dp"
                 android:src="@drawable/blockquote" />
 
-            <ImageView
-                android:id="@+id/action_insert_link"
-                style="@style/ImageView"
-                android:layout_marginHorizontal="4dp"
-                android:contentDescription="@null"
-                android:padding="10dp"
-                android:src="@drawable/insert_link" />
         </LinearLayout>
     </HorizontalScrollView>
 

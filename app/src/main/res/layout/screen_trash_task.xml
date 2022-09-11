@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color">
+
+
+    <ImageView
+        android:id="@+id/image_back"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="16sp"
+        android:background="@drawable/bg_image"
+        android:padding="13dp"
+        android:src="@drawable/ic_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/image_clean_trash"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="16sp"
+        android:background="@drawable/bg_image"
+        android:padding="13dp"
+        android:src="@drawable/ic_delete_all"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/recycle_bin"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toBottomOf="@id/image_back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/image_back" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list_trashes"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:clipToPadding="true"
+        android:orientation="vertical"
+        android:padding="8dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/image_back"
+        tools:listitem="@layout/list_item_tasks" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

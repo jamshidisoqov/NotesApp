@@ -13,7 +13,9 @@ data class NoteData(
     val description: String,
     val pinned: Int = 0,
     val date: String,
-    val color:String="#FFFFFF"
+    val color: String = "#FFFFFF",
+    val status: Int = 1,
+    val tag: String
 ) : Parcelable {
-    fun toNoteEntity() = NoteEntity(id, category, title, description, pinned, date,color)
+    fun toNoteEntity() = NoteEntity(id, category, title, description, pinned, date, color, status,tag)
 }

@@ -24,6 +24,10 @@ interface TasksViewModel {
 
     val categoryListLiveData: LiveData<List<TaskCategoryData>>
 
+    val basketLiveData: LiveData<Unit>
+
+    val deleteCategoryLiveData: LiveData<TaskCategoryData>
+
     fun addCategoryClick()
 
     fun editItemClick(taskData: TaskData)
@@ -36,9 +40,17 @@ interface TasksViewModel {
 
     fun deleteTask(taskData: TaskData)
 
-    fun categoryClick(category:Int)
+    fun categoryClick(category: Int)
 
     fun addTask()
 
+    fun basketClicked()
+
     fun supportClick()
+
+    fun deleteCategoryClick(taskCategoryData: TaskCategoryData)
+
+    fun deleteCategory(taskCategoryData: TaskCategoryData)
+
+    fun searchClicked()
 }

@@ -7,7 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import uz.gita.notes_app.R
 import uz.gita.notes_app.data.models.NoteCategoryData
 import uz.gita.notes_app.databinding.ListItemChipBinding
+import uz.gita.notes_app.utils.extensions.gone
 import uz.gita.notes_app.utils.extensions.inflate
+import uz.gita.notes_app.utils.extensions.visible
 
 // Created by Jamshid Isoqov an 9/7/2022
 class ChipAdapter : RecyclerView.Adapter<ChipAdapter.ViewHolder>() {
@@ -17,12 +19,19 @@ class ChipAdapter : RecyclerView.Adapter<ChipAdapter.ViewHolder>() {
     var selectedPosition = 0
 
     val selectedCategoryId: Int
-        get() = notesCategoryList[selectedPosition].id
+        get() = if (notesCategoryList.isNotEmpty()) notesCategoryList[selectedPosition].id
+        else 1
 
     private var itemClickListener: ((Int) -> Unit)? = null
 
     fun setItemClickListener(block: (Int) -> Unit) {
         itemClickListener = block
+    }
+
+    private var itemDeleteListener: ((NoteCategoryData) -> Unit)? = null
+
+    fun setDeleteListener(block: (NoteCategoryData) -> Unit) {
+        itemDeleteListener = block
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -41,6 +50,14 @@ class ChipAdapter : RecyclerView.Adapter<ChipAdapter.ViewHolder>() {
                 selectedPosition = absoluteAdapterPosition
                 notifyItemChanged(absoluteAdapterPosition)
             }
+            binding.root.setOnLongClickListener {
+                if (absoluteAdapterPosition != 0&&selectedPosition!=absoluteAdapterPosition)
+                    binding.imageDelete.visible()
+                true
+            }
+            binding.imageDelete.setOnClickListener {
+                itemDeleteListener?.invoke(notesCategoryList[absoluteAdapterPosition])
+            }
         }
 
         fun onBind() {
@@ -52,6 +69,7 @@ class ChipAdapter : RecyclerView.Adapter<ChipAdapter.ViewHolder>() {
                 binding.tvChip.setBackgroundResource(R.drawable.bg_chip_unselected)
                 binding.tvChip.setTextColor(Color.WHITE)
             }
+            binding.imageDelete.gone()
         }
 
     }

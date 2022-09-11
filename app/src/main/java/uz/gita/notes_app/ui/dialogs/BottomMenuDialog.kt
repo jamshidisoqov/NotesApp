@@ -7,8 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import uz.gita.notes_app.MainActivity
+import uz.gita.notes_app.R
 import uz.gita.notes_app.databinding.DialogMenuBottomBinding
 import uz.gita.notes_app.presenter.impl.BottomMenuViewModelImpl
 import uz.gita.notes_app.utils.Constants
@@ -47,17 +49,17 @@ class BottomMenuDialog : BottomSheetDialogFragment() {
         dismiss()
         val intent = Intent(Intent.ACTION_SEND)
         intent.type = "text/plain"
-        intent.putExtra(Intent.EXTRA_SUBJECT, "UpTodo")
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Notes")
         intent.putExtra(
             Intent.EXTRA_TEXT,
-            "link: https://play.google.com/store/apps/details?id=uz.gita.logicwordio"
+            "link: https://play.google.com/store/apps/details?id=uz.gita.notes_app_io"
         )
-        startActivity(Intent.createChooser(intent, "UpTodo"))
+        startActivity(Intent.createChooser(intent, "Notes"))
     }
 
     private val aboutObserver = Observer<Unit> {
         dismiss()
-        //findNavController().navigate(R.id.aboutFragment)
+        findNavController().navigate(R.id.aboutScreen)
     }
 
 }

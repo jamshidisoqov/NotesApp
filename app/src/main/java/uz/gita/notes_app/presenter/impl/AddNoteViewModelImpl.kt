@@ -1,6 +1,5 @@
 package uz.gita.notes_app.presenter.impl
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -28,10 +27,10 @@ class AddNoteViewModelImpl : AddNoteViewModel, ViewModel() {
 
     override val changesLiveData = eventLiveData<Pair<Int, Boolean>>()
 
-    override val messageLiveData:MutableLiveData<String> = MutableLiveData()
+    override val messageLiveData: MutableLiveData<String> = MutableLiveData()
 
     override fun changeType(type: Int) {
-        val ty = type-1
+        val ty = type - 1
         if (types.contains(ty)) {
             types.remove(ty)
             changesLiveData.value = Pair(ty, false)
@@ -48,11 +47,11 @@ class AddNoteViewModelImpl : AddNoteViewModel, ViewModel() {
 
 
     override fun saveData(noteData: NoteData) {
-        if (noteData.title==""){
+        if (noteData.title == "") {
             messageLiveData.value = "Title is empty, please enter a title"
             return
         }
-        if (noteData.description=="") {
+        if (noteData.description == "") {
             messageLiveData.value = "Description is empty, please enter a title"
             return
         }

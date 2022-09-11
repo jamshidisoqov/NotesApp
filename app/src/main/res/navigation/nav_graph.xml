@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_mainScreen_to_tasksScreen"
             app:destination="@id/tasksScreen" />
+        <action
+            android:id="@+id/action_mainScreen_to_aboutScreen"
+            app:destination="@id/aboutScreen" />
     </fragment>
     <fragment
         android:id="@+id/notesScreen"
@@ -28,6 +31,12 @@
         <action
             android:id="@+id/action_notesScreen_to_updateNoteScreen"
             app:destination="@id/updateNoteScreen" />
+        <action
+            android:id="@+id/action_notesScreen_to_searchNoteScreen"
+            app:destination="@id/searchNoteScreen" />
+        <action
+            android:id="@+id/action_notesScreen_to_trashNoteScreen"
+            app:destination="@id/trashNoteScreen" />
     </fragment>
     <fragment
         android:id="@+id/tasksScreen"
@@ -40,6 +49,12 @@
         <action
             android:id="@+id/action_tasksScreen_to_updateTaskScreen"
             app:destination="@id/updateTaskScreen" />
+        <action
+            android:id="@+id/action_tasksScreen_to_searchTaskScreen"
+            app:destination="@id/searchTaskScreen" />
+        <action
+            android:id="@+id/action_tasksScreen_to_trashTaskScreen"
+            app:destination="@id/trashTaskScreen" />
     </fragment>
     <fragment
         android:id="@+id/addNoteScreen"
@@ -79,4 +94,65 @@
             android:name="task"
             app:argType="uz.gita.notes_app.data.models.TaskData" />
     </fragment>
+    <fragment
+        android:id="@+id/searchNoteScreen"
+        tools:layout="@layout/screen_search_note"
+        android:name="uz.gita.notes_app.ui.note.search.SearchNoteScreen"
+        android:label="SearchNoteScreen" >
+        <action
+            android:id="@+id/action_searchNoteScreen_to_updateNoteScreen"
+            app:destination="@id/updateNoteScreen" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchTaskScreen"
+        tools:layout="@layout/screen_search_task"
+        android:name="uz.gita.notes_app.ui.task.search.SearchTaskScreen"
+        android:label="SearchTaskScreen" >
+        <action
+            android:id="@+id/action_searchTaskScreen_to_updateTaskScreen"
+            app:destination="@id/updateTaskScreen" />
+    </fragment>
+    <fragment
+        android:id="@+id/trashNoteScreen"
+        tools:layout="@layout/screen_trash_note"
+        android:name="uz.gita.notes_app.ui.note.trash.TrashNoteScreen"
+        android:label="TrashNoteScreen" >
+        <action
+            android:id="@+id/action_trashNoteScreen_to_trashDetailsNoteScreen"
+            app:destination="@id/trashDetailsNoteScreen" />
+    </fragment>
+    <fragment
+        android:id="@+id/trashDetailsNoteScreen"
+        tools:layout="@layout/screen_trash_note_details"
+        android:name="uz.gita.notes_app.ui.note.trash.details.TrashDetailsNoteScreen"
+        android:label="TrashDetailsNoteScreen" >
+        <argument
+            android:name="trash"
+            app:argType="uz.gita.notes_app.data.models.NoteData" />
+    </fragment>
+    <fragment
+        android:id="@+id/trashTaskScreen"
+        tools:layout="@layout/screen_trash_task"
+        android:name="uz.gita.notes_app.ui.task.trash.TrashTaskScreen"
+        android:label="TrashTaskScreen" >
+        <action
+            android:id="@+id/action_trashTaskScreen_to_trashTaskDetailsScreen"
+            app:destination="@id/trashTaskDetailsScreen" />
+    </fragment>
+    <fragment
+        android:id="@+id/trashTaskDetailsScreen"
+        tools:layout="@layout/screen_trash_task_details"
+        android:name="uz.gita.notes_app.ui.task.trash.details.TrashTaskDetailsScreen"
+        android:label="TrashTaskDetailsScreen" >
+        <argument
+            android:name="task"
+            app:argType="uz.gita.notes_app.data.models.TaskData" />
+    </fragment>
+    <fragment
+        android:id="@+id/aboutScreen"
+        tools:layout="@layout/screen_about"
+        android:name="uz.gita.notes_app.ui.about.AboutScreen"
+        android:label="AboutScreen" />
+
+
 </navigation>

@@ -21,6 +21,10 @@ interface NotesViewModel {
 
     val addCategoryLiveData: LiveData<Unit>
 
+    val openTrashLiveData: LiveData<Unit>
+
+    val deleteCategoryLiveData: LiveData<NoteCategoryData>
+
     val categoryListLiveData: LiveData<List<NoteCategoryData>>
 
     fun addCategoryClick()
@@ -29,14 +33,23 @@ interface NotesViewModel {
 
     fun deleteItemClick(noteData: NoteData)
 
+    fun categoryDeleteClick(noteCategoryData: NoteCategoryData)
+
     fun addCategory(categoryData: NoteCategoryData)
 
     fun deleteNote(noteData: NoteData)
 
-    fun categoryClick(category:Int)
+    fun deleteCategory(noteCategoryData: NoteCategoryData)
+
+    fun categoryClick(category: Int)
 
     fun addNote()
 
     fun supportClick()
+
+    fun searchClick()
+
+    fun basketClicked()
+
 
 }

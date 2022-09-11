@@ -24,6 +24,7 @@ class AddCategoryDialog(ctx: Context) : Dialog(ctx) {
         binding.btnSave.setOnClickListener {
             val name = binding.inputCategoryName.text.toString()
             if (name.isNotEmpty()) {
+                dismiss()
                 savedListener?.invoke(name)
             } else {
                 binding.inputCategoryName.error = "Name must be entered"

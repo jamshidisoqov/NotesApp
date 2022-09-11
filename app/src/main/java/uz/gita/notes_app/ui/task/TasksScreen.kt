@@ -51,12 +51,20 @@ class TasksScreen : Fragment(R.layout.screen_tasks) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewBinding.listTask.adapter = taskAdapter
         viewBinding.listChips.adapter = chipAdapter
+
+        viewBinding.imageSearch.setOnClickListener {
+            viewModel.searchClicked()
+        }
         viewBinding.imageSupport.setOnClickListener {
             viewModel.supportClick()
         }
 
         viewBinding.fabAddTasks.setOnClickListener {
             viewModel.addTask()
+        }
+
+        viewBinding.imageBasket.setOnClickListener {
+            viewModel.basketClicked()
         }
 
         viewBinding.imageCategoryAdd.setOnClickListener {
@@ -66,8 +74,14 @@ class TasksScreen : Fragment(R.layout.screen_tasks) {
         taskAdapter.setEditListener {
             viewModel.editItemClick(it)
         }
+        taskAdapter.setDeleteListener {
+            viewModel.deleteItemClick(it)
+        }
         chipAdapter.setItemClickListener {
             viewModel.categoryClick(it)
+        }
+        chipAdapter.setDeleteListener {
+            viewModel.deleteCategoryClick(it)
         }
 
         taskAdapter.setCheckedListener {
@@ -83,6 +97,8 @@ class TasksScreen : Fragment(R.layout.screen_tasks) {
         viewModel.deleteTaskLiveData.observe(this, deleteObserver)
         viewModel.searchLiveData.observe(this, searchObserver)
         viewModel.supportLiveData.observe(this, supportObserver)
+        viewModel.basketLiveData.observe(this, basketObserver)
+        viewModel.deleteCategoryLiveData.observe(this,deleteCategoryObserver)
     }
 
     private fun subscribeUiDataObservers() {
@@ -91,7 +107,15 @@ class TasksScreen : Fragment(R.layout.screen_tasks) {
     }
 
     private val searchObserver = Observer<Unit> {
-        //find search
+        findNavController().navigate(TasksScreenDirections.actionTasksScreenToSearchTaskScreen())
+    }
+
+    private val deleteCategoryObserver = Observer<TaskCategoryData> {
+        val dialog = DeleteDialog(requireContext())
+        dialog.show()
+        dialog.setDeleteListener {
+            viewModel.deleteCategory(it)
+        }
     }
     private val supportObserver = Observer<Unit> {
         val dialog = BottomMenuDialog()
@@ -127,6 +151,10 @@ class TasksScreen : Fragment(R.layout.screen_tasks) {
             viewBinding.imagePlaceHolder.visible()
         } else viewBinding.imagePlaceHolder.invisible()
         taskAdapter.submitList(it)
+    }
+
+    private val basketObserver = Observer<Unit> {
+        navController.navigate(TasksScreenDirections.actionTasksScreenToTrashTaskScreen())
     }
 
 

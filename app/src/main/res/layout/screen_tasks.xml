@@ -16,6 +16,21 @@
         android:textSize="42sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    <ImageView
+        android:id="@+id/image_basket"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/bg_image"
+        android:padding="13dp"
+        android:src="@drawable/ic_basket"
+        android:tooltipText="@string/recycle_bin"
+        app:layout_constraintBottom_toBottomOf="@id/tv_header_title"
+        app:layout_constraintEnd_toStartOf="@id/image_search"
+        app:layout_constraintTop_toTopOf="@id/tv_header_title"
+        tools:ignore="ContentDescription"
+        tools:targetApi="o" />
+
 
     <ImageView
         android:id="@+id/image_support"

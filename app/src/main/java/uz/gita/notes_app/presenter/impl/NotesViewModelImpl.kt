@@ -9,15 +9,10 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import uz.gita.notes_app.data.models.NoteCategoryData
 import uz.gita.notes_app.data.models.NoteData
-import uz.gita.notes_app.domain.usecase.note.AddNoteCategoryUseCase
-import uz.gita.notes_app.domain.usecase.note.DeleteNoteUseCase
-import uz.gita.notes_app.domain.usecase.note.GetAllNoteByCategoryUseCase
-import uz.gita.notes_app.domain.usecase.note.GetAllNoteCategoryUseCase
-import uz.gita.notes_app.domain.usecase.note.impl.AddNoteCategoryUseCaseImpl
-import uz.gita.notes_app.domain.usecase.note.impl.DeleteNoteUseCaseImpl
-import uz.gita.notes_app.domain.usecase.note.impl.GetAllNoteByCategoryUseCaseImpl
-import uz.gita.notes_app.domain.usecase.note.impl.GetAllNoteCategoryUseCaseImpl
+import uz.gita.notes_app.domain.usecase.note.*
+import uz.gita.notes_app.domain.usecase.note.impl.*
 import uz.gita.notes_app.presenter.NotesViewModel
+import uz.gita.notes_app.utils.extensions.emptyLiveData
 import uz.gita.notes_app.utils.extensions.eventLiveData
 
 class NotesViewModelImpl : NotesViewModel, ViewModel() {
@@ -25,9 +20,11 @@ class NotesViewModelImpl : NotesViewModel, ViewModel() {
     private val getAllNoteByCategoryUseCase: GetAllNoteByCategoryUseCase =
         GetAllNoteByCategoryUseCaseImpl()
 
+    private val deleteCategoryUseCase: DeleteNoteCategoryUseCase = DeleteNoteCategoryUseCaseImpl()
+
     private val getAllCategory: GetAllNoteCategoryUseCase = GetAllNoteCategoryUseCaseImpl()
 
-    private val deleteNoteUseCase: DeleteNoteUseCase = DeleteNoteUseCaseImpl()
+    private val updateNoteUseCase: UpdateNoteUseCase = UpdateNoteUseCaseImpl()
 
     private val addNoteCategoryUseCase: AddNoteCategoryUseCase = AddNoteCategoryUseCaseImpl()
 
@@ -45,6 +42,10 @@ class NotesViewModelImpl : NotesViewModel, ViewModel() {
 
     override val addCategoryLiveData: MutableLiveData<Unit> = MutableLiveData()
 
+    override val openTrashLiveData = emptyLiveData()
+
+    override val deleteCategoryLiveData = eventLiveData<NoteCategoryData>()
+
     override val categoryListLiveData: MutableLiveData<List<NoteCategoryData>> = MutableLiveData()
 
 
@@ -52,10 +53,8 @@ class NotesViewModelImpl : NotesViewModel, ViewModel() {
         viewModelScope.launch {
             getAllCategory.getAllNoteCategory().onEach {
                 categoryListLiveData.value = it
-            }.launchIn(this)
-
-            getAllNoteByCategoryUseCase.getAllNotesByCategory().onEach {
-                notesLiveData.value = it
+                if (it.isNotEmpty())
+                categoryClick(it[0].id)
             }.launchIn(this)
         }
     }
@@ -72,6 +71,10 @@ class NotesViewModelImpl : NotesViewModel, ViewModel() {
         deleteNoteLiveData.value = noteData
     }
 
+    override fun categoryDeleteClick(noteCategoryData: NoteCategoryData) {
+        deleteCategoryLiveData.value = noteCategoryData
+    }
+
     override fun addCategory(categoryData: NoteCategoryData) {
         viewModelScope.launch(Dispatchers.IO) {
             addNoteCategoryUseCase.addNoteCategory(categoryData)
@@ -80,11 +83,17 @@ class NotesViewModelImpl : NotesViewModel, ViewModel() {
 
     override fun deleteNote(noteData: NoteData) {
         viewModelScope.launch(Dispatchers.IO) {
-            deleteNoteUseCase.deleteNote(noteData)
+            updateNoteUseCase.updateNote(noteData.copy(status = 2))
         }
     }
 
-    override fun categoryClick(category:Int) {
+    override fun deleteCategory(noteCategoryData: NoteCategoryData) {
+        viewModelScope.launch(Dispatchers.IO) {
+            deleteCategoryUseCase.deleteNoteCategory(noteCategoryData)
+        }
+    }
+
+    override fun categoryClick(category: Int) {
         viewModelScope.launch {
             getAllNoteByCategoryUseCase.getAllNotesByCategory(category)
                 .onEach {
@@ -99,5 +108,13 @@ class NotesViewModelImpl : NotesViewModel, ViewModel() {
 
     override fun supportClick() {
         supportLiveData.value = Unit
+    }
+
+    override fun searchClick() {
+        searchLiveData.value = Unit
+    }
+
+    override fun basketClicked() {
+        openTrashLiveData.value = Unit
     }
 }

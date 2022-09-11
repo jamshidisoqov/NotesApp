@@ -2,6 +2,7 @@ package uz.gita.notes_app.data.source.local.dao
 
 import androidx.room.*
 import kotlinx.coroutines.flow.Flow
+import uz.gita.notes_app.data.models.NoteCategoryData
 import uz.gita.notes_app.data.source.local.entity.NoteCategoryEntity
 import uz.gita.notes_app.data.source.local.entity.NoteEntity
 
@@ -27,11 +28,28 @@ interface NoteDao {
     @Delete
     suspend fun deleteNote(noteList: List<NoteEntity>)
 
-    @Query("SELECT*FROM notes WHERE category=:category")
+    @Delete
+    suspend fun deleteNoteCategory(noteCategoryEntity: NoteCategoryEntity)
+
+    @Query("SELECT*FROM notes WHERE category=:category AND status=1")
     fun getAllNotesByCategory(category: Int = 1): Flow<List<NoteEntity>>
 
     @Query(" SELECT*FROM note_category")
     fun getAllNotesCategory(): Flow<List<NoteCategoryEntity>>
 
+    @Query("SELECT*FROM notes WHERE title LIKE '%' || :query || '%' AND status = 1 OR tag LIKE '%' || :query || '%'")
+    fun search(query: String): Flow<List<NoteEntity>>
+
+    @Query("SELECT*FROM notes WHERE status = 2")
+    fun getAllTrashes(): Flow<List<NoteEntity>>
+
+    @Query("SELECT*FROM notes WHERE status = 1")
+    fun getAllNotes(): Flow<List<NoteEntity>>
+
+    @Query("DELETE FROM notes WHERE status = 2")
+    suspend fun deleteAllTrashNotes()
+
+    @Query("SELECT tag FROM notes WHERE status = 1 AND NOT(tag isNull or tag ='')")
+    fun getAllTags(): Flow<List<String>>
 
 }

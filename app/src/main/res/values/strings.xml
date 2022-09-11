@@ -16,4 +16,13 @@
     <string name="add_category">Add category</string>
     <string name="name">Name</string>
     <string name="choose_color">Choose color…</string>
+    <string name="search">Search</string>
+    <string name="search_for_note">Search for note</string>
+    <string name="search_for_task">Search for task</string>
+    <string name="recycle_bin">Recycle Bin</string>
+    <string name="restore_really">Are you sure you want to empty the cart?</string>
+    <string name="tag">#Tag</string>
+
+    <string name="app_version">Version:1.1</string>
+    <string name="developer">Developer from Isoqov Jamshid</string>
 </resources>

@@ -13,10 +13,21 @@ interface NoteRepository {
 
     suspend fun deleteNote(noteData: NoteData)
 
+    suspend fun deleteAllTrashNotes()
+
+    suspend fun deleteNoteCategory(noteCategoryData: NoteCategoryData)
+
     suspend fun insertNoteCategory(noteCategoryData: NoteCategoryData)
 
     fun getAllNoteByCategory(category: Int): Flow<List<NoteData>>
 
     fun getAllNoteCategory(): Flow<List<NoteCategoryData>>
+
+    fun getAllTrash(): Flow<List<NoteData>>
+
+    fun searchNotes(query: String): Flow<List<NoteData>>
+
+    fun getAllTags(): Flow<List<String>>
+
 
 }
