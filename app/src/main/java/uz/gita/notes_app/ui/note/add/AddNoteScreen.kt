@@ -114,6 +114,7 @@ class AddNoteScreen : Fragment(R.layout.screen_add_notes) {
     private val saveObserver = Observer<Unit> {
         binding.inputTitle.setText("")
         binding.inputDescription.html = ""
+        binding.inputTag.setText("")
     }
 
     private val changesObserver = Observer<Pair<Int, Boolean>> {

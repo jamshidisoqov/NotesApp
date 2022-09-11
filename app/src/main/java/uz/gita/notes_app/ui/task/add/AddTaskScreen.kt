@@ -115,6 +115,7 @@ class AddTaskScreen : Fragment(R.layout.screen_add_tasks) {
     private val saveObserver = Observer<Unit> {
         vieBinding.inputTitle.setText("")
         vieBinding.inputDescription.html = ""
+        vieBinding.inputTag.setText("")
     }
 
     private val changesObserver = Observer<Pair<Int, Boolean>> {
